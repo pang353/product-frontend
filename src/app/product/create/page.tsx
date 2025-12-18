@@ -46,36 +46,38 @@ export default function CreateProduct() {
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>เพิ่มสินค้าใหม่ (Zod Validation)</h1>
+    <div className="max-w-3xl mx-auto p-6">
+      <h1 className="mb-6 text-2xl font-semibold">เพิ่มสินค้าใหม่ (Zod Validation)</h1>
 
       {serverError && (
-        <div style={{ color: 'red', border: '1px solid red', padding: '10px', marginBottom: '10px' }}>
+        <div className="mb-4 rounded-md border border-red-300 bg-red-50 p-3 text-red-700">
           Server Error: {serverError}
         </div>
       )}
 
-      <form onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: 480 }}>
-        <div style={{ marginBottom: 8 }}>
-          <label>ชื่อ</label><br />
-          <input type="text" {...register('name')} />
-          {errors.name && <span style={{ color: 'red' }}> * {String(errors.name.message)}</span>}
-        </div>
-
-        <div style={{ marginBottom: 8 }}>
-          <label>ราคา</label><br />
-          <input type="number" {...register('price')} />
-          {errors.price && <span style={{ color: 'red' }}> * {String(errors.price.message)}</span>}
-        </div>
-
-        <div style={{ marginBottom: 8 }}>
-          <label>รายละเอียด</label><br />
-          <textarea {...register('description')} />
+      <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl space-y-4">
+        <div>
+          <label className="mb-1 block text-sm text-gray-700">ชื่อ</label>
+          <input type="text" {...register('name')} className="w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          {errors.name && <div className="mt-1 text-sm text-red-600">* {String(errors.name.message)}</div>}
         </div>
 
         <div>
-          <button type="submit" disabled={isSubmitting}>{isSubmitting ? 'กำลังบันทึก...' : 'บันทึก'}</button>{' '}
-          <Link href="/product"><button type="button" style={{ marginLeft: 8 }}>ยกเลิก</button></Link>
+          <label className="mb-1 block text-sm text-gray-700">ราคา</label>
+          <input type="number" {...register('price')} className="w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          {errors.price && <div className="mt-1 text-sm text-red-600">* {String(errors.price.message)}</div>}
+        </div>
+
+        <div>
+          <label className="mb-1 block text-sm text-gray-700">รายละเอียด</label>
+          <textarea {...register('description')} className="h-28 w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+
+        <div className="flex gap-2">
+          <button type="submit" disabled={isSubmitting} className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:opacity-60">
+            {isSubmitting ? 'กำลังบันทึก...' : 'บันทึก'}
+          </button>
+          <Link href="/product" className="inline-flex items-center rounded-md border px-4 py-2 text-gray-700 hover:bg-gray-50">ยกเลิก</Link>
         </div>
       </form>
     </div>
